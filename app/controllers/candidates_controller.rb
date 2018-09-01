@@ -16,7 +16,7 @@ class CandidatesController < ApplicationController
     if @candidate.save
       flash[:notice] = "建立成功"
     else
-      flash[:alert] = "建立有誤"
+      flash[:alert] = @candidate.errors.fall_messages.to_sentence
     end
     redirect_back(fallback_location: root_path)
   end
@@ -28,7 +28,7 @@ class CandidatesController < ApplicationController
     if @candidate.save
       flash[:notice] = "更新成功"
     else
-      flash[:alert] = "更新有誤"
+      flash[:alert] = @candidate.errors.fall_messages.to_sentence
     end
     redirect_to root_path
   end
