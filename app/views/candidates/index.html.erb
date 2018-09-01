@@ -17,6 +17,9 @@
               <td><%= candidate.party %></td>
               <td><%= candidate.politics %></td>
               <td><%= candidate.votes %></td>
+              <td>
+                <%= link_to "編輯候選人", candidates_path(id: candidate.id)%>
+              </td>
             </tr>
           <% end %>
         </tbody>

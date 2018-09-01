@@ -2,7 +2,12 @@ class CandidatesController < ApplicationController
 
   def index
     @candidates = Candidate.all
-    @candidate = Candidate.new
+
+    if params[:id]
+      @candidate= Candidate.find(params[:id])
+    else
+      @candidate = Candidate.new
+    end
   end
 
   def create
@@ -14,6 +19,18 @@ class CandidatesController < ApplicationController
       flash[:alert] = "建立有誤"
     end
     redirect_back(fallback_location: root_path)
+  end
+
+  def update
+    @candidate = Candidate.find(params[:id])
+    @candidate.update(params_candidate)
+
+    if @candidate.save
+      flash[:notice] = "更新成功"
+    else
+      flash[:alert] = "更新有誤"
+    end
+    redirect_to root_path
   end
 
   private
