@@ -24,7 +24,8 @@ class CandidatesController < ApplicationController
   def update
     @candidate = Candidate.find(params[:id])
     @candidate.update(params_candidate)
-
+    # 此為測試功能，當候選人更新成功會加10票，(可以用來做瀏覽數量)
+    @candidate.votes = @candidate.votes+10
     if @candidate.save
       flash[:notice] = "更新成功"
     else
