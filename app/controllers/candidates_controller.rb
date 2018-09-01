@@ -10,6 +10,17 @@ class CandidatesController < ApplicationController
     end
   end
 
+  def vote
+    @candidate = Candidate.find(params[:id])
+    @candidate.vote_logs.create!(ip_address: request.remote_ip)
+    if @candidate.save
+      redirect_to candidates_path, notice: "完成投票！"
+    else
+      @candidate.errors.fall_messages.to_sentence
+      redirect_to candidates_path
+    end
+  end
+
   def create
     @candidate = Candidate.new(params_candidate)
 
@@ -37,6 +48,7 @@ class CandidatesController < ApplicationController
   def destroy
     @candidate = Candidate.find(params[:id])
     @candidate.destroy
+    flash[:alert] = "asd"
     redirect_back(fallback_location: root_path)
   end
 
