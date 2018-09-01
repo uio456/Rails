@@ -11,15 +11,25 @@
           </tr>
         </thead>
         <tbody>
-          <% @candidates.each do |candiadte|%>
+          <% @candidates.each do |candidate|%>
             <tr>
-              <td><%= candiadte.name %> (年齡：<%= candidate.age %> 歲 )</td>
-              <td><%= candiadte.party %></td>
+              <td><%= candidate.name %> (年齡：<%= candidate.age %> 歲 )</td>
+              <td><%= candidate.party %></td>
               <td><%= candidate.politics %></td>
               <td><%= candidate.votes %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
+      <br>
+      <br>
+      <br>
+      <%= simple_form_for(@candidate) do |f| %>
+        <%= f.input :name, label: "姓名" %>
+        <%= f.input :age, label: "年齡" %>
+        <%= f.input :party, label: "政黨" %>
+        <%= f.input :politics, label: "政見" %>
+        <%= f.submit %>
+      <% end %>
   </div>
 </div>
