@@ -19,6 +19,7 @@
               <td><%= candidate.votes %></td>
               <td>
                 <%= link_to "編輯候選人", candidates_path(id: candidate.id)%>
+                <%= link_to "刪除候選人", candidate_path(candidate), method: :delete, data: { confirm: "確定刪除？" } %>
               </td>
             </tr>
           <% end %>

@@ -33,6 +33,12 @@ class CandidatesController < ApplicationController
     redirect_to root_path
   end
 
+  def destroy
+    @candidate = Candidate.find(params[:id])
+    @candidate.destroy
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def params_candidate
