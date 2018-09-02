@@ -10,8 +10,12 @@
   </head>
 
   <body>
-    <p><%= flash[:notice] %></p>
-    <p><%= flash[:alert] %></p>
-    <%= yield %>
+    <%= link_to '回到 Welcome', root_path %>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

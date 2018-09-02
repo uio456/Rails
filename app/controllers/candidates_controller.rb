@@ -1,4 +1,5 @@
 class CandidatesController < ApplicationController
+  before_action :authenticate_member!
 
   def index
     @candidates = Candidate.all
