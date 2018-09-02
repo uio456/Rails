@@ -1,0 +1,29 @@
+<div class="member-info">
+  <div class="div">
+    <p>使用者名稱: <%= @member.name %></p>
+    <div class="friends">
+      <h6>好友人數： <%= @friends.size %></h6>
+      <% @friends.each do |friend| %>
+        <%= friend.name %>
+      <% end %>
+      <hr>
+    </div>
+    <div class="not_accepted_friends">
+      <h6>好友邀請人數： <%= @not_accepted_friends.size %></h6>
+      <% @not_accepted_friends.each do |friend| %>
+        <li><%= friend.name %> 是接收者</li>
+      <% end %>
+      <hr>
+    </div>
+    <div class="not_responded_friends">
+      <h6>好友： <%= @not_responded_friends.size %></h6>
+      <% @not_responded_friends.each do |friend|%>
+       <li> <%= friend.name %> 送出好友邀請</li>
+      <% end %>
+      <hr>
+    </div>
+  </div>
+</div>
+<%= link_to '回到使用者列表', members_path %> <br>
+
+目前Duncan 跟member各送出一次交友邀請

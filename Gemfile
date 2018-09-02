@@ -30,6 +30,7 @@ gem 'simple_form', '~> 4.0', '>= 4.0.1'
 gem 'devise'
 gem 'bootstrap', '~> 4.1', '>= 4.1.3'
 gem 'jquery-rails'
+gem 'hirb', '~> 0.7.3'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

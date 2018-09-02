@@ -1,6 +1,14 @@
-<h1>Members#index</h1>
-<ul>
-  <% @members.each do |member| %>
-    <li><%= member.name %></li>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="col-md-4">
+    <h1>Members#index</h1>
+    <ul>
+      <% @members.each do |member| %>
+        <li>
+          <%= link_to member.name, member_path(member) %>
+          好友邀請
+        </li>
+        <br>
+      <% end %>
+    </ul>
+  </div>
+</div>
