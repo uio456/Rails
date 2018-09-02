@@ -10,6 +10,12 @@ class CandidatesController < ApplicationController
     end
   end
 
+  def show
+    @candidate = Candidate.find(params[:id])
+    @candidate.increment(:view)
+    @candidate.save
+  end
+
   def vote
     @candidate = Candidate.find(params[:id])
     @candidate.vote_logs.create!(ip_address: request.remote_ip)
