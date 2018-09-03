@@ -1,24 +1,41 @@
 <div class="member-info">
   <div class="div">
     <p>使用者名稱: <%= @member.name %></p>
+    <div class="friendships_table">
+      <h6>目前 friendships_table 資料有： <%= @friendships.size %>筆</h6>
+        <ul>
+        <% @friendships.each do |friend| %>
+          <li><p><%= friend.member.name %> 加了 <%= friend.friend.name %> </p></li>
+        <% end %>
+        </ul> 
+      </h6>
+      <hr>
+    </div>
     <div class="friends">
-      <h6>好友人數： <%= @friends.size %></h6>
+      <h6>friends 我主動加的好友： <%= @friends.size %></h6>
       <% @friends.each do |friend| %>
         <%= friend.name %>
       <% end %>
       <hr>
     </div>
+    <div class="inverse_friends">
+      <h6>inverse_friends 別人家我好友： <%= @inverse_friends.size %></h6>
+      <% @inverse_friends.each do |friend| %>
+        <%= friend.name %>
+      <% end %>
+      <hr>
+    </div>
     <div class="not_accepted_friends">
-      <h6>好友邀請人數： <%= @not_accepted_friends.size %></h6>
+      <h6>not_accepted_friends 自己送出的邀請(可收回邀請)： <%= @not_accepted_friends.size %></h6>
       <% @not_accepted_friends.each do |friend| %>
         <li><%= friend.name %> 是接收者</li>
       <% end %>
       <hr>
     </div>
     <div class="not_responded_friends">
-      <h6>好友： <%= @not_responded_friends.size %></h6>
-      <% @not_responded_friends.each do |friend|%>
-       <li> <%= friend.name %> 送出好友邀請</li>
+      <h6>not_responded_friends 別人送來的邀請(可接受或拒絕)： <%= @not_responded_friends.size %></h6>
+      <% @not_responded_friends.each do |member|%>
+       <li> <%= member.name %> 送來的</li>
       <% end %>
       <hr>
     </div>
@@ -26,4 +43,3 @@
 </div>
 <%= link_to '回到使用者列表', members_path %> <br>
 
-目前Duncan 跟member各送出一次交友邀請

@@ -5,7 +5,9 @@ class MembersController < ApplicationController
 
   def show
     @member = Member.find(params[:id])
+    @friendships = Friendship.all
     @friends = @member.friends
+    @inverse_friends = @member.inverse_friends
     @not_accepted_friends = @member.not_accepted_friends
     @not_responded_friends = @member.not_responded_friends
   end
