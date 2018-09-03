@@ -16,6 +16,7 @@
       <ul>
       <% @all_friends.each do |friend| %>
         <li><%= friend.name %></li>
+        <button>解除好友</button>
       <% end %>
     </ul>
       <hr>
@@ -38,6 +39,7 @@
       <h6>waiting_for_accept 自己送出的邀請(可收回邀請)： <%= @waiting_for_accept.size %></h6>
       <% @waiting_for_accept.each do |friend| %>
         <li>等待 <%= friend.name %> 接受</li>
+        <button>取消請求</button>
       <% end %>
       <hr>
     </div>
@@ -45,6 +47,8 @@
       <h6>request_friends 別人送來的邀請(可接受或拒絕)： <%= @request_friends.size %></h6>
       <% @request_friends.each do |friend|%>
        <li> <%= friend.name %> 送來的請求</li>
+       <button>接受</button>
+       <button>忽略</button>
       <% end %>
       <hr>
     </div>
