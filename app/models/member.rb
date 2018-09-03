@@ -15,4 +15,8 @@ class Member < ApplicationRecord
   
   has_many :not_responded_friendships, -> {where status: false}, class_name: "Friendship", foreign_key: "friend_id"
   has_many :not_responded_friends, through: :not_responded_friendships, source: :member
+
+  def all_friends
+    (friends + inverse_friends).uniq
+  end
 end

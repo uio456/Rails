@@ -12,6 +12,15 @@
       <hr>
     </div>
     <div class="friends">
+      <h6>all_friends 我主動加的好友： <%= @all_friends.size %></h6>
+      <ul>
+      <% @all_friends.each do |friend| %>
+        <li><%= friend.name %></li>
+      <% end %>
+    </ul>
+      <hr>
+    </div>
+    <div class="friends">
       <h6>friends 我主動加的好友： <%= @friends.size %></h6>
       <% @friends.each do |friend| %>
         <%= friend.name %>
@@ -34,8 +43,8 @@
     </div>
     <div class="not_responded_friends">
       <h6>not_responded_friends 別人送來的邀請(可接受或拒絕)： <%= @not_responded_friends.size %></h6>
-      <% @not_responded_friends.each do |member|%>
-       <li> <%= member.name %> 送來的</li>
+      <% @not_responded_friends.each do |friend|%>
+       <li> <%= friend.name %> 送來的</li>
       <% end %>
       <hr>
     </div>
