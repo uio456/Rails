@@ -5,7 +5,9 @@
       <% @members.each do |member| %>
         <li>
           <%= link_to member.name, member_path(member) %>
-          好友邀請
+          <% if member != current_member %>
+            <%= link_to '加好友', add_friend_member_path(member), method: :post, data: {"disable-with": "Waiting...."}, class: "btn btn-primary btn-sm" %>
+          <% end %>  
         </li>
         <br>
       <% end %>

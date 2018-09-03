@@ -10,6 +10,6 @@ class MembersController < ApplicationController
     @friends = @member.friends
     @inverse_friends = @member.inverse_friends
     @waiting_for_accept = @member.waiting_for_accept
-    @request_friends = @member.request_friends
+    @friends_request = @member.friends_request
   end
 end

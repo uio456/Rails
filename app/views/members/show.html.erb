@@ -43,10 +43,10 @@
       <% end %>
       <hr>
     </div>
-    <div class="request_friends">
-      <h6>request_friends 別人送來的邀請(可接受或拒絕)： <%= @request_friends.size %></h6>
-      <% @request_friends.each do |friend|%>
-       <li> <%= friend.name %> 送來的請求</li>
+    <div class="friends_request">
+      <h6>friends_request 別人送來的邀請(可接受或拒絕)： <%= @friends_request.size %></h6>
+      <% @friends_request.each do |friend|%>
+       <li> <%= friend.name %> 送來的好友請求</li>
        <button>接受</button>
        <button>忽略</button>
       <% end %>

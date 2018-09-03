@@ -9,7 +9,12 @@ Rails.application.routes.draw do
     end
   end
   resources :welcomes, only: [:index]
-  resources :members
+  resources :members do
+    member do
+      post :add_friend
+      post :unfriend
+    end
+  end
 
   root "welcomes#index"
 end

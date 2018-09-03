@@ -14,7 +14,7 @@ class Member < ApplicationRecord
   has_many :waiting_for_accept, through: :wait_accept_friendships, source: :friend
   
   has_many :request_friendships, -> {where status: false}, class_name: "Friendship", foreign_key: "friend_id"
-  has_many :request_friends, through: :request_friendships, source: :member
+  has_many :friends_request, through: :request_friendships, source: :member
 
   def all_friends
     (friends + inverse_friends).uniq
