@@ -5,7 +5,7 @@
       <h6>目前所有 friendships_table 資料有 <%= @friendships.size %> 筆</h6>
         <ul>
         <% @friendships.each do |friend| %>
-          <li><p><%= friend.member.name %> 加了 <%= friend.friend.name %> </p></li>
+          <li><p><%= friend.member.name %> 請求加 <%= friend.friend.name %> </p></li>
         <% end %>
         </ul> 
       </h6>
@@ -45,9 +45,9 @@
     </div>
     <div class="friends_request">
       <h6>friends_request 別人送來的邀請(可接受或拒絕)： <%= @friends_request.size %></h6>
-      <% @friends_request.each do |friend|%>
-       <li> <%= friend.name %> 送來的好友請求</li>
-       <%= link_to '接受', accept_member_path(friend), method: :post, data: {"disable-with": "wating...."}, class: 'btn btn-primary btn-sm' %>
+      <% @friends_request.each do |member|%>
+       <li> <%= member.name %> 送來的好友請求</li>
+       <%= link_to '接受', accept_friendship_path(member_id: member.id, friend_id: current_member.id), method: :post, data: {"disable-with": "wating...."}, class: 'btn btn-primary btn-sm' %>
        <button>忽略</button>
       <% end %>
       <hr>

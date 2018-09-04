@@ -18,5 +18,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :friendships, only: [:create, :destroy] do
+    member do
+      post :accept
+    end
+  end
+
   root "welcomes#index"
 end
