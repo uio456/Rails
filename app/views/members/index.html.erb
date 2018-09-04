@@ -1,16 +1,21 @@
 <div class="row">
   <div class="col-md-4">
     <h1>Members#index</h1>
-    accept
-    ignore
-    從設計 all_friend 
-    已加過好友隱藏按鈕
+    收回好友邀情/刪除好友
     <ul>
       <% @members.each do |member| %>
         <li>
           <%= link_to member.name, member_path(member) %>
           <% if member != current_member %>
-            <%= link_to '加好友', add_friend_member_path(member), method: :post, data: {"disable-with": "Waiting...."}, class: "btn btn-primary btn-sm" %>
+            <% if current_member.friends?(member) %>
+              <button class="btn btn-success btn-sm"> 已成為好友 </button>
+            <% elsif current_member.waiting_for_accept?(member) %>
+              <button class="btn btn-light btn-sm" >已送出邀請</button>
+            <% elsif current_member.friends_request?(member) %>
+              <button class="btn btn-warning btn-sm">對方送出好友邀請</button>
+            <% else %>  
+              <%= link_to '加好友', friendships_path(friend_id: member), method: :post, data: {"disable-with": "Waiting...."}, class: "btn btn-primary btn-sm" %>  
+            <% end %>
           <% end %>  
         </li>
         <br>
@@ -18,3 +23,9 @@
     </ul>
   </div>
 </div>
+
+friendship 獨立的路由時，view要傳 friendships_path(friend_id: member)， 
+controller 要接收                 (friend_id: params[:friend_id])
+
+friendship 在 member 路由底下，view要傳 add_friend_member_path(member)， 
+controller 要接收                         (friend_id: params[:id])

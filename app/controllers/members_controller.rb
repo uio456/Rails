@@ -1,4 +1,5 @@
 class MembersController < ApplicationController
+  before_action :authenticate_member!
   def index
     @members = Member.all
   end
@@ -14,7 +15,7 @@ class MembersController < ApplicationController
   end
 
   def add_friend
-    @friendship = current_member.wait_accept_friendships.build(friend_id: params[:id])
+    @friendship = current_member.friendships.build(friend_id: params[:id], status: false)
 
     if @friendship.save
       flash[:notice] = '已送出邀請'
@@ -25,8 +26,8 @@ class MembersController < ApplicationController
   end
 
   def unfriend
-    @friendship = current_member.friendships.where(friend_id: params[:id]).first
-    @friendship.destroy
+    @friendship = current_member.friendships.where(friend_id: params[:id])
+    @friendship.destroy_all
     redirect_to member_path(current_member), alert: "已收回好友要求"
   end
 

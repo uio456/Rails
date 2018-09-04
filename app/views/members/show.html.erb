@@ -37,20 +37,28 @@
     </div>
     <div class="waiting_for_accept">
       <h6>waiting_for_accept 自己送出的邀請(可收回邀請)： <%= @waiting_for_accept.size %></h6>
-      <% @waiting_for_accept.each do |friend| %>
-        <li>等待 <%= friend.name %> 接受</li>
-        <%= link_to '收回好友邀請', unfriend_member_path(friend), method: :post, data: {"disable-with": "wating...."}, class: 'btn btn-danger btn-sm' %>
+      <% @waiting_for_accept.each do |member| %>
+        <!-- 這裡的 member 是對方 -->
+        <% if current_member != member %>
+        <li>
+          等待 <%= member.name %> 接受。
+          <%= link_to '收回好友邀請', ignore_friendship_path(member_id: current_member.id, friend_id: member.id), method: :post, data: { confirm: "收回邀請嗎？", "disable-with": "wating...."}, class: 'btn btn-primary btn-sm' %>
+        </li>
+        <% end %>
       <% end %>
       <hr>
     </div>
     <div class="friends_request">
       <h6>friends_request 別人送來的邀請(可接受或拒絕)： <%= @friends_request.size %></h6>
       <% @friends_request.each do |member|%>
+        <!-- 這裡的 member 是對方 -->
+        <% if current_member != member %>
         <li> 
           <%= member.name %> 送來的好友請求。
-          <%= link_to '接受', accept_friendship_path(member_id: member.id, friend_id: current_member.id), method: :post, data: {"disable-with": "wating...."}, class: 'btn btn-primary btn-sm' %>
-          <%= link_to '不接受', ignore_friendship_path(member_id: member.id, friend_id: current_member.id), method: :post, data: { confirm: "不接受邀請嗎？", "disable-with": "wating...."}, class: 'btn btn-primary btn-sm' %>
-        </li>  
+          <%= link_to '接受', accept_friendship_path(member_id: member.id), method: :post, data: {"disable-with": "wating...."}, class: 'btn btn-primary btn-sm' %>
+          <%= link_to '不接受', ignore_friendship_path(member_id: member.id), method: :post, data: { confirm: "不接受邀請嗎？", "disable-with": "wating...."}, class: 'btn btn-primary btn-sm' %>
+        </li>
+        <% end %>  
       <% end %>
       <hr>
     </div>
