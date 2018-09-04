@@ -46,9 +46,11 @@
     <div class="friends_request">
       <h6>friends_request 別人送來的邀請(可接受或拒絕)： <%= @friends_request.size %></h6>
       <% @friends_request.each do |member|%>
-       <li> <%= member.name %> 送來的好友請求</li>
-       <%= link_to '接受', accept_friendship_path(member_id: member.id, friend_id: current_member.id), method: :post, data: {"disable-with": "wating...."}, class: 'btn btn-primary btn-sm' %>
-       <button>忽略</button>
+        <li> 
+          <%= member.name %> 送來的好友請求。
+          <%= link_to '接受', accept_friendship_path(member_id: member.id, friend_id: current_member.id), method: :post, data: {"disable-with": "wating...."}, class: 'btn btn-primary btn-sm' %>
+          <%= link_to '不接受', ignore_friendship_path(member_id: member.id, friend_id: current_member.id), method: :post, data: { confirm: "不接受邀請嗎？", "disable-with": "wating...."}, class: 'btn btn-primary btn-sm' %>
+        </li>  
       <% end %>
       <hr>
     </div>
