@@ -29,4 +29,10 @@ class MembersController < ApplicationController
     @friendship.destroy
     redirect_to member_path(current_member), alert: "已收回好友要求"
   end
+
+  def accept
+    @firendship = current_member.friends_request.where(member_id: params[:id])
+    @friendship.update(status: true)
+    false[:notice] = "確認為好友"
+  end
 end

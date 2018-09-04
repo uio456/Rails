@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     member do
       post :add_friend
       post :unfriend
+      post :accept
+      post :ignore
     end
   end
 

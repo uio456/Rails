@@ -47,7 +47,7 @@
       <h6>friends_request 別人送來的邀請(可接受或拒絕)： <%= @friends_request.size %></h6>
       <% @friends_request.each do |friend|%>
        <li> <%= friend.name %> 送來的好友請求</li>
-       <button>接受</button>
+       <%= link_to '接受', accept_member_path(friend), method: :post, data: {"disable-with": "wating...."}, class: 'btn btn-primary btn-sm' %>
        <button>忽略</button>
       <% end %>
       <hr>
