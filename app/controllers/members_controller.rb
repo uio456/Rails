@@ -14,13 +14,19 @@ class MembersController < ApplicationController
   end
 
   def add_friend
-    @friendships = current_member.friendships.build(friend_id: params[:id])
+    @friendship = current_member.wait_accept_friendships.build(friend_id: params[:id])
 
-    if @friendships.save
+    if @friendship.save
       flash[:notice] = '已送出邀請'
     else
-      flash[:alert] = @friendships.errors.full_messages.to_sentence
+      flash[:alert] = @friendship.errors.full_messages.to_sentence
     end
     redirect_back(fallback_location: members_path)
+  end
+
+  def unfriend
+    @friendship = current_member.friendships.where(friend_id: params[:id]).first
+    @friendship.destroy
+    redirect_to member_path(current_member), alert: "已收回好友要求"
   end
 end

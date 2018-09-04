@@ -39,7 +39,7 @@
       <h6>waiting_for_accept 自己送出的邀請(可收回邀請)： <%= @waiting_for_accept.size %></h6>
       <% @waiting_for_accept.each do |friend| %>
         <li>等待 <%= friend.name %> 接受</li>
-        <button>取消請求</button>
+        <%= link_to '收回好友邀請', unfriend_member_path(friend), method: :post, data: {"disable-with": "wating...."}, class: 'btn btn-danger btn-sm' %>
       <% end %>
       <hr>
     </div>

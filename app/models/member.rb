@@ -10,6 +10,7 @@ class Member < ApplicationRecord
   has_many :inverse_friendships, -> {where status: true}, class_name: "Friendship", foreign_key: "friend_id"
   has_many :inverse_friends, through: :inverse_friendships, source: :member
 
+  # 使用 wait_accept_friendships 送出 create 好友邀請。
   has_many :wait_accept_friendships, -> {where status: false}, class_name: "Friendship", foreign_key: "member_id", dependent: :destroy
   has_many :waiting_for_accept, through: :wait_accept_friendships, source: :friend
   
