@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.where(public: true)
+    @posts_public = Post.where(public: true)
+    @posts_draft = Post.where(public: false)
     @post = Post.new
   end
 
