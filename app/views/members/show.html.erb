@@ -16,7 +16,7 @@
       <ul>
       <% @all_friends.each do |friend| %>
         <li><%= friend.name %></li>
-        <button>解除好友</button>
+        <%= link_to '解除好友', friendship_path(friend), method: :delete, data: {confirm: "確定解除好友嗎？", "disable-with": "wating...."}, class: "btn btn-info btn-sm" %>
       <% end %>
     </ul>
       <hr>
@@ -42,7 +42,7 @@
         <% if current_member != member %>
         <li>
           等待 <%= member.name %> 接受。
-          <%= link_to '收回好友邀請', ignore_friendship_path(member_id: current_member.id, friend_id: member.id), method: :post, data: { confirm: "收回邀請嗎？", "disable-with": "wating...."}, class: 'btn btn-primary btn-sm' %>
+          <%= link_to '收回好友邀請', friendship_path(member), method: :delete, data: {confirm: "確定收回嗎？", "disable-with": "wating...."}, class: "btn btn-info btn-sm" %>
         </li>
         <% end %>
       <% end %>

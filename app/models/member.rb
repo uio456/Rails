@@ -40,4 +40,12 @@ class Member < ApplicationRecord
   def friends?(member)
     self.friends.include?(member) || self.inverse_friends.include?(member)
   end
+
+  def destroy_friendship!(member)
+    ActiveRecord::Base.transaction do
+      self.friendships.where(friend_id: member.id).destroy_all
+      self.inverse_friendships.where(member_id: member.id).destroy_all
+      self.wait_accept_friendships.where(friend_id: member.id).destroy_all
+    end
+  end
 end
