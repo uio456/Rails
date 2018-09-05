@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     end
   end
   resources :welcomes, only: [:index]
+  resources :posts
   resources :members do
     member do
       # post :add_friend

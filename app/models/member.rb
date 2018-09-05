@@ -3,6 +3,8 @@ class Member < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  has_many :posts, dependent: :destroy
   
   # Friendship 的資料表紀錄，menber 是送出邀請的人，friend_id 是被邀請的人。
 

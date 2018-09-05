@@ -12,6 +12,7 @@
   <body>
     <%= link_to '回到 Welcome', root_path %> |
     <%= link_to '回到Members', members_path %> |
+    <%= link_to '回到Posts', posts_path %> |
     <% if member_signed_in? %>
       <%= link_to('登出', destroy_member_session_path, method: :delete) %>
     <% end %>

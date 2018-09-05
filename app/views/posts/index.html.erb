@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <h1>Posts Index</h1>
+    <div class="col-sm-12 mt-4">
+      <h3>All_post</h3>
+      <ul>
+        <% @posts.each do |post| %>
+          <li>
+            <%= post.title %>
+            <%= post.content %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-sm-12 mt-4">
+      <%= form_for @post do |f| %>
+        <div class="form-group">
+          <%= f.text_field :title, placeholder: "Title", class: "form-control bg-light" %>
+        </div>
+        <div class="form-group">
+          <%= f.text_area :content, placeholder: "Content", class: "form-control bg-light" %>
+        </div>
+        <div class="form-group">
+          <div class="form-check form-check-inline">
+            Who Can See
+          </div>
+          <div class="form-check form-check-inline">
+            <%= radio_button :post, :authority, "all", { checked: true , class: "form-check-input" } %>
+            <%= label_tag :authority_All, "All", class: "form-check-label" %>
+          </div>
+          <div class="form-check form-check-inline">
+            <%= radio_button :post, :authority, "friend", class: "form-check-input" %>
+            <%= label_tag :authority_Friend, "Friend", class: "form-check-label" %>
+          </div>
+          <div class="form-check form-check-inline">
+            <%= radio_button :post, :authority, "myself", class: "form-check-input" %>
+            <%= label_tag :authority_Myself, "Myself", class: "form-check-label" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check form-check-inline">
+            Category
+          </div>
+          <div class="form-check form-check-inline">
+            <%#= f.collection_check_boxes :category_ids, Category.all, :id, :name, {}, {multiple: true, class: "form-check-input"} do |cb| %>
+              <%#= cb.label(class: "form-check-label mr-2") { cb.check_box(class: "form-check-input") + cb.text } %>
+            <%# end %>
+          </div>
+        </div>
+        <div class="form-group">
+          Status:
+        </div>
+        <div class="form-group">
+          <%= f.submit "Save Draft" , class: "btn btn-primary" %>
+          <%= f.submit "Submit" , class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
