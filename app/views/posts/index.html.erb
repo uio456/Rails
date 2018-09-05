@@ -16,7 +16,7 @@
       <ul>
         <% @posts_draft.each do |post| %>
           <li>
-            <%= post.title %>
+            <%= link_to post.title, post_path(post) %>
             <%= post.content %>
             </li>
         <% end %>

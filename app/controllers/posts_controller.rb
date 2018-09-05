@@ -11,8 +11,8 @@ class PostsController < ApplicationController
     if params[:commit] == "Save Draft"
       @post.public = false
       if @post.save
-        # redirect_to drafts_member_path(current_member)
-        redirect_to posts_path
+        redirect_to drafts_member_path(current_member)
+        # redirect_to posts_path
       else
         flash.new[:alert] = @post.errors.full_messages.to_sentence
         render :index
@@ -35,6 +35,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :public)
+    params.require(:post).permit(:title, :content, :public, :authority)
   end
 end

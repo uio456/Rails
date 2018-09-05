@@ -36,4 +36,8 @@ class MembersController < ApplicationController
     @friendship.update(status: true)
     false[:notice] = "確認為好友"
   end
+
+  def drafts
+    @drafts = current_member.posts.where(public: false)
+  end
 end

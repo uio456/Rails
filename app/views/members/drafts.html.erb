@@ -1,0 +1,9 @@
+<h2>草稿</h2>
+<ul>
+  <% @drafts.each do |post| %>
+    <li>   
+      <%= link_to post.title, post_path(post) %>
+      <%= post.content %>
+    </li>
+  <% end %>
+</ul>
