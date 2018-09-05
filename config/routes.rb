@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :members do
     member do
       get :drafts
+      post :change_role
       # post :add_friend
       # post :unfriend
       # post :accept

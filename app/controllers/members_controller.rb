@@ -40,4 +40,23 @@ class MembersController < ApplicationController
   def drafts
     @drafts = current_member.posts.where(public: false)
   end
+
+  def change_role
+    # 因為在前台所以多開一個 action 更換權限，update 留給更新 Profile
+    # 如果在後台可以直接用update action 就好，
+    @member = Member.find(params[:id])
+    if @member.email == "admin@example.com"
+      flash[:alert] = "不要動！這個帳號是管理員"
+      redirect_to members_path
+    else
+      @member.update(member_params)
+      flash[:notice] = "#{@member.name}權限更新為 #{@member.role}"
+      redirect_to members_path
+    end
+  end
+  private
+
+  def member_params
+    params.require(:member).permit(:role)
+  end
 end

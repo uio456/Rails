@@ -5,7 +5,7 @@
     <ul>
       <% @members.each do |member| %>
         <li>
-          <%= link_to member.name, member_path(member) %>
+          <%= link_to member.name, member_path(member) %> <span><%= member.role %></span>
           <% if member != current_member %>
             <% if current_member.friends?(member) %>
               <button class="btn btn-success btn-sm"> 已成為好友 </button>
@@ -17,6 +17,12 @@
               <%= link_to '加好友', friendships_path(friend_id: member), method: :post, data: {"disable-with": "Waiting...."}, class: "btn btn-primary btn-sm" %>  
             <% end %>
           <% end %>  
+            <div class="change_role form-inline">
+              <%= form_for [member], url: change_role_member_path(id: member.id), method: :post do |f| %>
+                <%= f.select :role, ["Normal","Admin","VIP"]%>
+                <%= f.submit class: "btn btn-primary btn-sm"%>
+              <%end%>
+            </div>
         </li>
         <br>
       <% end %>
