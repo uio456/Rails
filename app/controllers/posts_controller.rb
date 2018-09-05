@@ -1,8 +1,7 @@
 class PostsController < ApplicationController
+  before_action :find_post
 
   def index
-    @posts_public = Post.where(public: true)
-    @posts_draft = Post.where(public: false)
     if params[:id]
       @post = Post.find(params[:id])
     else
@@ -15,18 +14,20 @@ class PostsController < ApplicationController
     if params[:commit] == "Save Draft"
       @post.public = false
       if @post.save
-        redirect_to drafts_member_path(current_member)
-        # redirect_to posts_path
+        # redirect_to drafts_member_path(current_member)
+        flash[:notice] = "儲存草稿"
+        redirect_to posts_path
       else
-        flash.new[:alert] = @post.errors.full_messages.to_sentence
+        flash[:alert] = @post.errors.full_messages.to_sentence
         render :index
       end
     else
       @post.public = true
       if @post.save
+        flash[:notice] = "發布"
         redirect_to post_path(@post)
       else
-        flash.new[:alert] = @post.errors.full_messages.to_sentence
+        flash[:alert] = @post.errors.full_messages.to_sentence
         render :index
       end
     end
@@ -37,17 +38,19 @@ class PostsController < ApplicationController
     if params[:commit] == "Submit"
       @post.public = true
       if @post.update(post_params)
+        flash[:notice] = "發布"
         redirect_to posts_path
       else
-        flash.new[:alert] = @post.errors.full_messages.to_sentence
+        flash.now[:alert] = @post.errors.full_messages.to_sentence
         render :index
       end
     else
       @post.public = false
       if @post.update(post_params)
-        redirect_to drafts_member_path(current_member)
+        flash[:notice] = "儲存草稿"
+        redirect_to posts_path
       else
-        flash.new[:alert] = @post.errors.full_messages.to_sentence
+        flash[:alert] = @post.errors.full_messages.to_sentence
         render :index
       end
     end
@@ -58,6 +61,11 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def find_post
+    @posts_public = Post.where(public: true)
+    @posts_draft = Post.where(public: false)
+  end
 
   def post_params
     params.require(:post).permit(:title, :content, :public, :authority)
