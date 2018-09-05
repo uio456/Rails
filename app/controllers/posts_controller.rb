@@ -3,7 +3,11 @@ class PostsController < ApplicationController
   def index
     @posts_public = Post.where(public: true)
     @posts_draft = Post.where(public: false)
-    @post = Post.new
+    if params[:id]
+      @post = Post.find(params[:id])
+    else
+      @post = Post.new
+    end
   end
 
   def create
@@ -21,6 +25,27 @@ class PostsController < ApplicationController
       @post.public = true
       if @post.save
         redirect_to post_path(@post)
+      else
+        flash.new[:alert] = @post.errors.full_messages.to_sentence
+        render :index
+      end
+    end
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if params[:commit] == "Submit"
+      @post.public = true
+      if @post.update(post_params)
+        redirect_to posts_path
+      else
+        flash.new[:alert] = @post.errors.full_messages.to_sentence
+        render :index
+      end
+    else
+      @post.public = false
+      if @post.update(post_params)
+        redirect_to drafts_member_path(current_member)
       else
         flash.new[:alert] = @post.errors.full_messages.to_sentence
         render :index
