@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   resources :friendships, only: [:create, :destroy] do
     member do
+      post :cancelled
       post :accept
       post :ignore
     end
