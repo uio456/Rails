@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'plans/index'
   get 'members/index'
   get 'welcome/index'
   devise_for :members
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   end
   resources :welcomes, only: [:index]
   resources :posts
+  resources :plans
   resources :members do
     member do
       get :drafts

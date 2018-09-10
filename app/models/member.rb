@@ -4,6 +4,7 @@ class Member < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :plans
   has_many :posts, dependent: :destroy
   
   # Friendship 的資料表紀錄，menber 是送出邀請的人，friend_id 是被邀請的人。
@@ -45,7 +46,7 @@ class Member < ApplicationRecord
     ActiveRecord::Base.transaction do
       self.friendships.where(friend_id: member.id).destroy_all
       self.inverse_friendships.where(member_id: member.id).destroy_all
-      self.wait_accept_friendships.where(friend_id: member.id).destroy_all
+      # self.wait_accept_friendships.where(friend_id: member.id).destroy_all
     end
   end
 end
