@@ -12,7 +12,7 @@
             <% elsif current_member.friends_request?(member) %>
               <button class="btn btn-warning btn-sm">對方送出好友邀請</button>
             <% else %>  
-              <%= link_to '加好友', friendships_path(friend_id: member), method: :post, data: {"disable-with": "Waiting...."}, class: "btn btn-primary btn-sm" %>  
+              <%= link_to '加好友', friendships_path(friend_id: member), method: :post, data: {"disable-with": "Waiting...."}, class: "btn btn-primary btn-sm" %>
             <% end %>
           <% end %>  
             <div class="change_role form-inline">

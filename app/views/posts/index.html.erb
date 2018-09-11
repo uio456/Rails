@@ -5,8 +5,10 @@
       <ul>
         <% @posts_public.each do |post| %>
           <li>
-            <%= post.title %>
-            <%= link_to 'Edit', posts_path(id: post.id) %>
+            <%= link_to post.title, post_path(post) %>
+            <%= link_to 'Edit', posts_path(id: post.id) %> <br>
+            Tag：<%= post.tag_list %> <br>
+            <hr>
             </li>
         <% end %>
       </ul>
@@ -16,15 +18,19 @@
       <ul>
         <% @posts_draft.each do |post| %>
           <li>
-            <%= link_to post.title, drafts_member_path(post) %>
-            
-            <%= link_to 'Edit', posts_path(id: post.id) %>
+            <%= link_to post.title, post_path(post) %>
+            <%= link_to 'Edit', posts_path(id: post.id) %> <br>
+            Tag：<%= post.tag_list %>
+            <hr>
             </li>
         <% end %>
       </ul>
     </div>
     <div class="col-sm-12 mt-5">
       <%= form_for @post do |f| %>
+      <div class="form-group">
+          <%= f.text_field :tag_list, value: f.object.tag_list.to_s, placeholder: "Add Tag", class: "form-control bg-light" %>
+        </div>
         <div class="form-group">
           <%= f.text_field :title, placeholder: "Title", class: "form-control bg-light" %>
         </div>
