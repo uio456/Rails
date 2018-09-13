@@ -25,16 +25,17 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    if params[:plan_id]
+    # if params[:plan_id]
       # @plan = Plan.find(params[:plan_id])
       @comment = Comment.find(params[:id])
       @comment.destroy
+      flash[:notice] = "#{@comment.commentable_type}_comment was deleted"
       redirect_back(fallback_location: root_path)
-    else
-      @comment = Comment.find(params[:id])
-      @comment.destroy
-      redirect_back(fallback_location: root_path)
-    end
+    # else
+      # @comment = Comment.find(params[:id])
+      # @comment.destroy
+      # redirect_back(fallback_location: root_path)
+    # end
   end
 
   private
