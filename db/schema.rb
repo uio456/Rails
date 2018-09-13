@@ -26,10 +26,12 @@ ActiveRecord::Schema.define(version: 2018_09_13_053949) do
 
   create_table "comments", force: :cascade do |t|
     t.text "content"
+    t.integer "member_id"
     t.integer "commentable_id"
     t.string "commentable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_comments_on_member_id"
   end
 
   create_table "friends", force: :cascade do |t|

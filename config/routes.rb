@@ -10,7 +10,12 @@ Rails.application.routes.draw do
     end
   end
   resources :welcomes, only: [:index]
-  resources :posts
+  resources :posts do
+    resources :comments, only: [:create, :destroy]
+    # member do
+      # post :comment
+    # end
+  end
   resources :plans
   resources :members do
     member do

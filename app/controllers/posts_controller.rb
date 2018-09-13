@@ -56,11 +56,24 @@ class PostsController < ApplicationController
     end
   end
 
+  # def comment
+  #   @post = post.find(params[:id])
+  #   @comment.user = current_user
+  #   @comment = @post.comments.build(comment_params)
+  #   @comment.save!
+  #   redirect_to post_path(@post)
+  # end
+
   def show
     @post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
   private
+
+  # def comment_params
+  #   params.require(:comment).permit(:content)
+  # end
 
   def find_post
     @posts_public = Post.where(public: true)
