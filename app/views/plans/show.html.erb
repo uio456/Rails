@@ -17,6 +17,8 @@
   
   留言人：<%= comment.member.name %>
   內容：<%= comment.content %> 
+  <%= link_to 'Delete', plan_comment_path(@plan, comment), method: :delete, data: {confirm: "確定刪除嗎？"} %>
+  
   <hr>
 
 <% end %>

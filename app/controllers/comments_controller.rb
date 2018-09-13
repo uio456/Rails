@@ -24,6 +24,19 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    if params[:plan_id]
+      # @plan = Plan.find(params[:plan_id])
+      @comment = Comment.find(params[:id])
+      @comment.destroy
+      redirect_back(fallback_location: root_path)
+    else
+      @comment = Comment.find(params[:id])
+      @comment.destroy
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   private
 
   def comment_params

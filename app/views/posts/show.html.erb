@@ -16,6 +16,7 @@ Tags：<%= @post.tag_list %>
   
   留言人：<%= comment.member.name %>
   內容：<%= comment.content %> 
+  <%= link_to 'Delete', post_comment_path(@post, comment), method: :delete, data: {confirm: "確定刪除嗎？"} %>
   <hr>
 
 <% end %>
