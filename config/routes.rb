@@ -16,7 +16,9 @@ Rails.application.routes.draw do
       # post :comment
     # end
   end
-  resources :plans
+  resources :plans do
+    resources :comments, only: [:create, :destroy]
+  end
   resources :members do
     member do
       get :drafts

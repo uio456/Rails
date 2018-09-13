@@ -1,3 +1,22 @@
 『<%= @plan.member.name %>』建立 <%= @plan.title %> <br>
 邀請了： <br>
 誰申請加入： <br>
+<hr>
+
+<h3>留言</h3>
+<%= form_for [@plan, @comment] do |f| %>
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+
+  <%= f.submit %>
+<% end %>
+
+<hr>
+
+<% @plan.comments.each do |comment| %>
+  
+  留言人：<%= comment.member.name %>
+  內容：<%= comment.content %> 
+  <hr>
+
+<% end %>

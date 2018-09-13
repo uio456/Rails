@@ -22,6 +22,7 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id])
+    @comment = Comment.new
   end
 
   private
