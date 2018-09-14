@@ -1,24 +1,47 @@
-『<%= @plan.member.name %>』建立 <%= @plan.title %> <br>
-邀請了： <br>
-誰申請加入： <br>
-<hr>
-
-<h3>留言</h3>
-<%= form_for [@plan, @comment] do |f| %>
-  <%= f.label :content %>
-  <%= f.text_area :content %>
-
-  <%= f.submit %>
-<% end %>
-
-<hr>
-
-<% @plan.comments.each do |comment| %>
-  
-  留言人：<%= comment.member.name %>
-  內容：<%= comment.content %> 
-  <%= link_to 'Delete', plan_comment_path(@plan, comment), method: :delete, data: {confirm: "確定刪除嗎？"} %>
-  
+<div class="row">
+  <div class="col-md-6">
+    
+  『<%= @plan.member.name %>』建立 <%= @plan.title %> <br>
+  邀請了： <br>
+  誰申請加入： <br>
   <hr>
 
-<% end %>
+  <h3>留言</h3>
+  <%= form_for [@plan, @comment] do |f| %>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+
+    <%= f.submit %>
+  <% end %>
+
+  <hr>
+
+  <% @plan.comments.each do |comment| %>
+    
+    留言人：<%= comment.member.name %>
+    內容：<%= comment.content %> 
+    <%= link_to 'Delete', plan_comment_path(@plan, comment), method: :delete, data: {confirm: "確定刪除嗎？"} %>
+    
+    <hr>
+
+  <% end %>
+  </div>
+  <div class="clo-md-6">
+  <ul>
+    <% @members.each do |member| %>
+      <li>
+        <%= link_to member.name, member_path(member) %>
+        <%= link_to '邀請加入計畫', invite_plan_path(@plan, member_id: member.id), method: :post, class: "btn btn-info btn-sm" %>
+        <br>
+      </li>
+    <% end %>
+  </ul>
+  <hr>
+  <% @invite_plans.each do |invite_plan| %>
+    invite_plna的id: <%= invite_plan.id %> <br>
+    invite_plna的member_id: <%= invite_plan.member_id %> <br>
+    <hr>
+  <% end %>
+
+  </div>
+</div>

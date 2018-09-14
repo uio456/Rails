@@ -9,7 +9,10 @@ class Member < ApplicationRecord
   
   has_many :comments
   has_many :comments_post, through: :comments, source: :post
+
+  has_many :invite_plans
   
+
   # Friendship 的資料表紀錄，menber 是送出邀請的人，friend_id 是被邀請的人。
 
   # member_id如果是自己，就會去拿 friend_id，並且status 要是 true，的用戶出來

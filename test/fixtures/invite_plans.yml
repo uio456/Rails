@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  member: one
+  plan: one
+  accept: false
+
+two:
+  member: two
+  plan: two
+  accept: false
