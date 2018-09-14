@@ -11,6 +11,7 @@ class PlansController < ApplicationController
 
   def create
     @plan = Plan.new(plan_params)
+    @plan.member = current_member
     if @plan.save
       flash[:notice] = "建立計畫 "
       redirect_to plans_path
@@ -29,7 +30,9 @@ class PlansController < ApplicationController
 
   def invite
     @plan = Plan.find(params[:id])
-    @invite_plan = InvitePlan.new(plan_id: params[:id], member_id: params[:memebr_id])
+    @user = User.find(params[])
+    # @invite_plan = InvitePlan.new(plan_id: params[:id], member_id: params[:memebr_id])
+    @invite_plan = @user.invite_plans.create(plan_id: @plan.id)
 
     if @invite_plan.save
       flash[:notice] = "邀請 #{member_id} 加入}"

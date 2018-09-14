@@ -1,5 +1,6 @@
 <div class="member-info">
-  <div class="div">
+  <div class="row">
+    <div class="col-md-8">
     <p>使用者名稱: <%= @member.name %></p>
     <div class="friendships_table">
       <h6>目前所有 friendships_table 資料有 <%= @friendships.size %> 筆</h6>
@@ -68,6 +69,16 @@
         <% end %>  
       <% end %>
       <hr>
+    </div>
+    </div>
+    <div class="col-md-4">
+      <h3>邀請參加的plan</h3>
+      <ul>
+        <% @invited_plans.each do |plan| %>
+        <li><%= link_to plan.title, plan_path(plan) %></li>
+        <% end %>
+
+      </ul>
     </div>
   </div>
 </div>

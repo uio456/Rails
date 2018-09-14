@@ -11,6 +11,7 @@ class Member < ApplicationRecord
   has_many :comments_post, through: :comments, source: :post
 
   has_many :invite_plans
+  has_many :invited_plans, through: :invite_plans, source: :plan
   
 
   # Friendship 的資料表紀錄，menber 是送出邀請的人，friend_id 是被邀請的人。

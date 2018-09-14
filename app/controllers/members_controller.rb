@@ -4,6 +4,21 @@ class MembersController < ApplicationController
     @members = Member.all
   end
 
+  def invite
+    @plan = Plan.find(params[:plan_id])
+    @member = Member.find(params[:member_id])
+    # @invite_plan = InvitePlan.new(plan_id: params[:id], member_id: params[:memebr_id])
+    @invite_plan = @member.invite_plans.create(plan: @plan)
+
+    if @invite_plan.save
+      flash[:notice] = "邀請 #{params[:member_id]} 加入"
+      redirect_to plan_path(@plan)
+    else
+      flash[:alert] = @invite_plan.errors.full_messages.to_sentence
+      redirect_back(fallback_location: plans_path)
+    end
+  end
+
   def show
     @member = Member.find(params[:id])
     @friendships = Friendship.all
@@ -12,6 +27,7 @@ class MembersController < ApplicationController
     @inverse_friends = @member.inverse_friends
     @waiting_for_accept = @member.waiting_for_accept
     @friends_request = @member.friends_request
+    @invited_plans = @member.invited_plans.all
   end
 
   # def add_friend

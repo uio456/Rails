@@ -17,9 +17,6 @@ Rails.application.routes.draw do
     # end
   end
   resources :plans do
-    member do
-      post :invite
-    end
     resources :comments, only: [:create, :destroy]
   end
   resources :members do
@@ -32,6 +29,7 @@ Rails.application.routes.draw do
       # post :ignore
     end
   end
+  post "/members/:member_id/plans/:plan_id", to: "members#invite", :as => :invite
 
   resources :friendships, only: [:create, :destroy] do
     member do
