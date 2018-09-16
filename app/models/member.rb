@@ -9,9 +9,15 @@ class Member < ApplicationRecord
   
   has_many :comments
   has_many :comments_post, through: :comments, source: :post
+  
+  # owner 邀請使用者，status: false
+  has_many :invite, -> {where status: false}, class_name: "InvitePlan"
+  # user 拿到邀請他的 plan，status: false
+  has_many :invited_plans, through: :invite, source: :plan
 
-  has_many :invite_plans
-  has_many :invited_plans, through: :invite_plans, source: :plan
+  def invited_plans?(member)
+    self.invited_plans.include?(member)
+  end
   
 
   # Friendship 的資料表紀錄，menber 是送出邀請的人，friend_id 是被邀請的人。

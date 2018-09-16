@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_14_012157) do
+ActiveRecord::Schema.define(version: 2018_09_15_082748) do
 
   create_table "candidates", force: :cascade do |t|
     t.string "name"
@@ -57,18 +57,9 @@ ActiveRecord::Schema.define(version: 2018_09_14_012157) do
     t.boolean "accept"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "status", default: false, null: false
     t.index ["member_id"], name: "index_invite_plans_on_member_id"
     t.index ["plan_id"], name: "index_invite_plans_on_plan_id"
-  end
-
-  create_table "invite_user_plans", force: :cascade do |t|
-    t.integer "member_id"
-    t.integer "plan_id"
-    t.boolean "accept", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_invite_user_plans_on_member_id"
-    t.index ["plan_id"], name: "index_invite_user_plans_on_plan_id"
   end
 
   create_table "members", force: :cascade do |t|

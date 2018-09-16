@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     # end
   end
   resources :plans do
+    member do
+      post :confirm
+    end
     resources :comments, only: [:create, :destroy]
   end
   resources :members do

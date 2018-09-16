@@ -5,6 +5,15 @@ class PlansController < ApplicationController
     @members = Member.all
   end
 
+  def confirm
+    # 不管是 申請加入 或 回覆答案 都跑這個action
+    @plan = Plan.find(params[:id])
+    @confirm = InvitePlan.where(plan_id: params[:id], member_id: current_member)
+    @confirm.update(status: true)
+    flash[:notice] = "加入plan"
+    redirect_back(fallback_location: @plan)
+  end
+
   def new
     @plan = Plan.new
   end
@@ -26,6 +35,7 @@ class PlansController < ApplicationController
     @comment = Comment.new
     @members = Member.all
     @invite_plans = InvitePlan.all
+    @plan_member = @plan.plan_member
   end
 
   def invite

@@ -3,8 +3,20 @@
     
   『<%= @plan.member.name %>』建立 <%= @plan.title %> <br>
   邀請了： <br>
-  誰申請加入： <br>
+  誰申請加入： 
+  <% @plan_member.each do |member| %>
+    <%= link_to member.name, member_path(member) %>
+  <% end %>
+  <br>
   <hr>
+
+  <h4>回覆/報名</h4>
+  <% if !@plan.invited_member?(current_member) %>
+    <%= link_to '回覆', confirm_plan_path(current_member), method: :post  %>
+  <% else %>
+  報名
+  <% end %>
+  <hr> 
 
   <h3>留言</h3>
   <%= form_for [@plan, @comment] do |f| %>
@@ -15,6 +27,9 @@
   <% end %>
 
   <hr>
+
+
+  
 
   <% @plan.comments.each do |comment| %>
     
@@ -30,16 +45,21 @@
   <ul>
     <% @members.each do |member| %>
       <li>
-        <%= link_to member.name, member_path(member) %>
-        <%= link_to '邀請加入計畫', invite_path(member, @plan), method: :post, class: "btn btn-info btn-sm" %>
+        <%# if @plan.member && member != current_member %>
+          <%= link_to member.name, member_path(member) %>
+          <%= link_to '邀請加入計畫', invite_path(member, @plan), method: :post, class: "btn btn-info btn-sm" %>
+        <%# end %>  
         <br>
       </li>
     <% end %>
   </ul>
   <hr>
-  <% @invite_plans.each do |invite_plan| %>
-    invite_plna的id: <%= invite_plan.id %> <br>
-    invite_plna的member_id: <%= invite_plan.member_id %> <br>
+  <% @invite_plans.each do |invite| %>
+    <h4>所有在InvitePlan的資料</h4>
+    invite_plnas 的id: <%= invite.id %> <br>
+    member_id: <%= invite.member_id %> <br>
+    plan_id: <%= invite.plan_id %> <br>
+    ststus: <%= invite.status %>
     <hr>
   <% end %>
 
