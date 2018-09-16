@@ -2,20 +2,24 @@
   <div class="col-md-6">
     
   『<%= @plan.member.name %>』建立 <%= @plan.title %> <br>
-  邀請了： <br>
+  邀請了：從plan 角度出發 <br>
   誰申請加入： 
   <% @plan_member.each do |member| %>
     <%= link_to member.name, member_path(member) %>
   <% end %>
   <br>
+  誰報名了：從plan 角度出發
   <hr>
 
   <h4>回覆/報名</h4>
-  <% if !@plan.invited_member?(current_member) %>
-    <%= link_to '回覆', confirm_plan_path(current_member), method: :post  %>
+    <!-- 如果是owner是審核，如果是user是回復 -->
+    <%= link_to '審核回覆', confirm_plan_path(current_member), method: :post  %> |
+    <%= link_to '拒絕', cancelled_plan_path(current_member), method: :post  %> <br>    
+  <% if !@plan.confirm_plans?(current_member) %>
   <% else %>
-  報名
   <% end %>
+    <%= link_to '報名', join_plan_path(current_member), method: :post %> |
+    <%= link_to '取消報名', cancelled_plan_path(current_member), method: :post  %>
   <hr> 
 
   <h3>留言</h3>

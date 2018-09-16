@@ -14,6 +14,27 @@ class PlansController < ApplicationController
     redirect_back(fallback_location: @plan)
   end
 
+  def cancelled
+    @plan = Plan.find(params[:id])
+    @confirm = InvitePlan.where(plan_id: params[:id], member_id: current_member).first
+    @confirm.destroy
+    flash[:notice] = "刪除邀請"
+    redirect_back(fallback_location: @plan)
+  end
+
+  def join
+    @plan = Plan.find(params[:id])
+    @join = current_member.invite.build(plan: @plan)
+
+    if @join.save
+      flash[:notice] = "申請加入"
+      redirect_back(fallback_location: @plan)
+    else
+      flash[:alert] = @join.errors.full_messages.to_sentence
+      redirect_back(fallback_location: @plan)
+    end
+  end
+
   def new
     @plan = Plan.new
   end

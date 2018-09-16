@@ -2,7 +2,8 @@ class Plan < ApplicationRecord
   validates_presence_of :title
   belongs_to :member
   has_many :comments, :as => :commentable
-
+  
+  # Plan 拿到 invite_plan，status: false
   has_many :invite_plans, -> { where status: false }
 
   has_many :confirm_plans, -> { where status: true }, class_name: "InvitePlan"
@@ -14,7 +15,7 @@ class Plan < ApplicationRecord
   attr_accessor :tag
   acts_as_taggable_on :tags
 
-
+  # 確認計畫
   def confirm_plans?(memebr)
     self.confirm_plans.include?(member)
   end
