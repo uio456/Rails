@@ -1,24 +1,6 @@
-# README
+# Rails 功能練習
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- 1.文章可發布/草稿
+- 2.使用者可加好友/等待回覆/確認別人加好友/略過加好友
+- 3.使用者可在post、paln 底下留言，但留言內容存在同一張資料表(多形關聯Polymorphic Associations)
+- 4.可邀請別人加入計畫
