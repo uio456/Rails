@@ -32,6 +32,7 @@ gem 'bootstrap', '~> 4.1', '>= 4.1.3'
 gem 'jquery-rails'
 gem 'hirb', '~> 0.7.3'
 gem 'acts-as-taggable-on', '~> 6.0'
+gem 'rb-readline'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -54,6 +55,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'pry-rails', '~> 0.3.9'
 end
 
 group :test do
