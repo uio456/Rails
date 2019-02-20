@@ -5,22 +5,27 @@ class Plan < ApplicationRecord
   
   # Plan 拿到 invite_plan，status: false
   has_many :invite_plans, -> { where status: false }
-
-  has_many :confirm_plans, -> { where status: true }, class_name: "InvitePlan"
+  # 拿到已送出邀請的 member
+  has_many :invited_member, through: :invite_plans, source: :member
+  
+  # 成立的 plan_member
+  has_many :confirm_plans, -> { where status: true }, class_name: "InvitePlan" 
+  # 拿到已是成員的 member
   has_many :plan_member, through: :confirm_plans, source: :member
 
-  has_many :inverse_friendships, -> {where status: true}, class_name: "Friendship", foreign_key: "friend_id"
-  has_many :inverse_friends, through: :inverse_friendships, source: :member
+
 
   attr_accessor :tag
   acts_as_taggable_on :tags
 
-  # 確認計畫
-  def confirm_plans?(memebr)
-    self.confirm_plans.include?(member)
+  # 已經邀請的 member 
+  def invited_member?(member)
+    self.invited_member.include?(member)
   end
 
-  def invited_member?(member)
-    self.invite_plans.include?(member)
+  # 已經是 plan_member
+  def plan_member?(member)
+    self.plan_member.include?(member)
   end
+
 end

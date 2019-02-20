@@ -13,15 +13,16 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    @member = Member.find(params[:id])
-    if current_member.friends?(@member)
+    @friend = Member.find(params[:id])
+    if current_member.friends?(@friend)
       # current_member.destroy_friendship!(@member)
       # 有 friends 跟 inverse_friends，另外定義一個方法處理
 
       # 我家別人 friends
       # friendship = Friendship.where(member_id: current_member.id, friend_id: params[:id]).destroy_all
       # 別人家我 inverse_friendships
-      friendship = Friendship.where(member_id: params[:id], friend_id: current_member.id).destroy_all
+      binding.pry
+      friendship = Friendship.where(member_id: current_member.id, friend_id: @friend).destroy_all
       flash[:notice] = 'unfriend'
     else
       flash[:alert] = 'unfriend failed'

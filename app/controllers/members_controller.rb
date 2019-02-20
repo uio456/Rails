@@ -19,6 +19,14 @@ class MembersController < ApplicationController
     end
   end
 
+   def cancelled
+    @plan = Plan.find(params[:id])
+    @confirm = InvitePlan.where(plan_id: params[:id], member_id: current_member).first
+    @confirm.destroy
+    flash[:notice] = "刪除邀請"
+    redirect_back(fallback_location: @plan)
+  end
+
   def show
     @member = Member.find(params[:id])
     @friendships = Friendship.all

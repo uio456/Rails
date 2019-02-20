@@ -15,8 +15,20 @@ class Member < ApplicationRecord
   # user 拿到邀請他的 plan，status: false
   has_many :invited_plans, through: :invite, source: :plan
 
-  def invited_plans?(member)
-    self.invited_plans.include?(member)
+  # user 想加入
+  has_many :join, -> {where status: false}, class_name: "InvitePlan"
+  # user 想加入
+  has_many :join_plan, through: :join, source: :plan
+
+
+  
+  # user been invite
+  def invited_plans?(plan)
+    self.invited_plans.include?(plan)
+  end
+
+  def join_plan?(plan)
+    self.join_plan.include?(plan)
   end
   
 

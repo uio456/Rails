@@ -12,14 +12,22 @@
   <hr>
 
   <h4>回覆/報名</h4>
-    <!-- 如果是owner是審核，如果是user是回復 -->
-    <%= link_to '審核回覆', confirm_plan_path(current_member), method: :post  %> |
-    <%= link_to '拒絕', cancelled_plan_path(current_member), method: :post  %> <br>    
-  <% if !@plan.confirm_plans?(current_member) %>
-  <% else %>
-  <% end %>
-    <%= link_to '報名', join_plan_path(current_member), method: :post %> |
-    <%= link_to '取消報名', cancelled_plan_path(current_member), method: :post  %>
+    <!-- 這裡做user 回覆邀請，報名/取消報名 -->
+    <% if current_member.invited_plans?(@plan) %>
+      <%= link_to '取消報名', cancelled_path(@plan, current_member), method: :post  %>
+    <% else %>  
+      <%= link_to '報名', join_plan_path(current_member), method: :post %> 
+    <% end %>
+
+    <% if @plan.invited_member?(current_member) %>
+      <%= link_to '忽略邀請', cancelled_path(@plan, current_member), method: :post  %>
+    <% else %>  
+      <%= link_to '加入', confirm_plan_path(current_member), method: :post if @plan.invited_member?(current_member) %> 
+    <% end %>  
+      
+  
+  
+  
   <hr> 
 
   <h3>留言</h3>
@@ -48,10 +56,17 @@
   <div class="clo-md-6">
   <ul>
     <% @members.each do |member| %>
+    <!-- 這裡做審核報名，送出邀請 -->
       <li>
         <%# if @plan.member && member != current_member %>
           <%= link_to member.name, member_path(member) %>
-          <%= link_to '邀請加入計畫', invite_path(member, @plan), method: :post, class: "btn btn-info btn-sm" %>
+          <% if @plan.invited_member?(member) %>
+            已送出邀請
+          <% elsif @plan.plan_member?(member) %>
+            已是成員
+          <% else %>  
+            <%= link_to '邀請加入計畫', invite_path(member, @plan), method: :post, class: "btn btn-info btn-sm" %>
+          <% end %>  
         <%# end %>  
         <br>
       </li>
