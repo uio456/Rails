@@ -1,0 +1,2 @@
+class Mytag < ApplicationRecord
+end
